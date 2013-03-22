@@ -97,3 +97,6 @@ packages-force:
 		repo-add ${REPO}/archiso.db.tar.gz ${REPO}/*.pkg.tar.xz; \
 	fi
 	@touch packages
+
+clean:
+	rm -rf ${REPO} pacman.conf work out PKGBUILDS/*/{src,pkg,*.pkg.tar.xz}
