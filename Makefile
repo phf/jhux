@@ -99,4 +99,4 @@ packages-force:
 	@touch packages
 
 clean:
-	rm -rf ${REPO} pacman.conf work out PKGBUILDS/*/{src,pkg,*.pkg.tar.xz}
+	rm -rf ${REPO} pacman.conf work out PKGBUILDS/*/{src,pkg,*.pkg.tar.xz} iso fs packages
