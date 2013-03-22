@@ -1,0 +1,16 @@
+[Unit]
+Description=Start an X Server
+After=systemd-user-sessions.service
+Wants=NetworkManager.service
+
+[Service]
+Environment=HOME=/root
+WorkingDirectory=/root
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/startx
+StandardOutput=syslog
+
+[Install]
+WantedBy=graphical.target
+

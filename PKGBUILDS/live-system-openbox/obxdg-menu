@@ -1,0 +1,4 @@
+#!/bin/bash
+echo \<openbox_pipe_menu\>
+xdg_menu --format openbox3
+echo \<\/openbox_pipe_menu\>

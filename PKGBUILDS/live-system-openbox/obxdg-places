@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo '<openbox_pipe_menu>'
+
+filemanager="pcmanfm"
+
+for bookmark in `cat .config/user-dirs.dirs | grep -v "^#" | sed s/^.*=//g | sed s/\"//g
+` ; do
+  bookmark=`eval "echo $bookmark"`
+  echo '<item label="'`basename ${bookmark}`'">'
+  echo '<action name="Execute"><execute>'
+  echo "$filemanager ${bookmark}"
+  echo '</execute></action>'
+  echo '</item>'
+done
+
+echo '</openbox_pipe_menu>'

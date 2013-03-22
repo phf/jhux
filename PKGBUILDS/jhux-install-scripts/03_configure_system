@@ -1,0 +1,37 @@
+USERNAME=$1
+PASSWORD=$2
+HOSTNAME=$3
+GRUB_INSTALL_DEV=$4
+
+cat > /mnt/usr/bin/chroot-install.sh << EOF
+ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+echo "LANG=\"en_US.UTF-8\"" > /etc/locale.conf
+echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
+locale-gen
+mkinitcpio -p linux
+
+modprobe dm-mod
+grub-install --target=i386-pc --recheck --debug $GRUB_INSTALL_DEV
+mkdir -p /boot/grub/locale
+cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+grub-mkconfig -o /boot/grub/grub.cfg
+
+systemctl enable gdm.service
+systemctl enable NetworkManager.service
+
+sed -i '/^1.*/s|$|   '$HOSTNAME'|' /etc/hosts
+echo $HOSTNAME > /etc/hostname
+
+useradd -m -g users -G audio,lp,optical,storage,video,wheel,power,scanner -s /bin/bash $USERNAME
+echo ${USERNAME}:${PASSWORD} | chpasswd
+passwd -l root
+
+EOF
+
+chmod +x /mnt/usr/bin/chroot-install.sh
+arch-chroot /mnt chroot-install.sh
+rm /mnt/usr/bin/chroot-install.sh
+
+cp /etc/pacman.d/mirrorlist /mnt/pacman.d/mirrorlist
+
+umount /mnt

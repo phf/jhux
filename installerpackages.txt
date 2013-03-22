@@ -1,0 +1,4 @@
+haveged
+gparted
+live-system-openbox
+jhux-install-scripts

@@ -1,1 +1,38 @@
 JH/UX - An experiment in distro maintenance.
+
+The list of packages that are installed on the LiveCD and the installed system
+is packagelist.txt. The list of packages that reside solely in the liveCD is
+installerpackages.txt.
+
+The folder filesystem contains various files that will be put into the LiveCD
+filesystem.
+
+The folder PKGBUILDS contains extra packages not contained in the Arch Linux
+repository, but still necessary for the LiveCD. These packages will be built
+and placed in a custom local repository in the folder "repo".
+
+The Arch Linux Repository Mirror, the ISO label, and the ISO name can be
+customized by changing the values of the variables at the top of the Makefile
+
+
+To build the iso, run:
+
+	make iso
+
+or simply
+
+	make
+
+
+To just build the packages, run:
+
+	make packages
+
+or to force a rebuild of all the packages, run:
+
+	make packages-force
+
+
+To setup the filesystem for further modifications, run:
+
+	make fs

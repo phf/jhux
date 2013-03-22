@@ -1,0 +1,39 @@
+pkgname=live-system-openbox
+pkgver=0.1
+pkgrel=1
+pkgdesc="Live system running on openbox"
+arch=('i686' 'x86_64')
+url="https://github.com/phf/jhux"
+license=('GPL')
+source=('startx.service'
+        'xinitrc'
+        'config.openbox.menu'
+        'obxdg-menu'
+        'obxdg-places')
+md5sums=('094baf0af9ec15befcecdd5920ace696'
+         'a71a8fa3b033ba90aa0c5dedcc07040c'
+         '9b8ff57f5ed330f424989003e922a1ec'
+         '3d7cee6e265a792cf4307ac70428bd79'
+         'dda405a1c4bb28dd89ffa0115879cd7e')
+build() {
+  cd "$srcdir"
+}
+
+package() {
+  depends=('openbox' 'tint2' 'network-manager-applet' 'gnome-settings-daemon'
+           'gnome-control-center' 'xdg-user-dirs' 'archlinux-xdg-menu'
+           'rxvt-unicode-better-wheel-scrollling' 'xorg-xinit')
+
+  cd "${srcdir}"
+  install -d "${pkgdir}/usr/lib/systemd/system/"
+  install -d "${pkgdir}/usr/lib/systemd/system/graphical.target.wants"
+  install -Dm 644 startx.service "${pkgdir}/usr/lib/systemd/system"
+  ln -s /usr/lib/systemd/system/startx.service "${pkgdir}/usr/lib/systemd/system/graphical.target.wants/"
+  install -d "${pkgdir}/root/"
+  install -Dm 755 xinitrc "${pkgdir}/root/.xinitrc"
+  install -d "${pkgdir}/root/.config/openbox/"
+  install -Dm 644 config.openbox.menu "${pkgdir}/root/.config/openbox/menu.xml"
+  install -d "${pkgdir}/usr/bin/"
+  install -Dm 755 obxdg-menu "${pkgdir}/usr/bin/"
+  install -Dm 755 obxdg-places "${pkgdir}/usr/bin/"
+}

@@ -1,0 +1,40 @@
+<openbox_menu>
+<menu execute="cat ~/.config/openbox/apps.xml" id="xdg-menu" label="Applications" />
+<menu execute="cat ~/.config/openbox/places.xml" id="xdg-places" label="Places" />
+<menu id="root-menu" label="Openbox 3">
+  <item label="Terminal">
+    <action name="Execute">
+      <command>urxvt</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Text Editor">
+    <action name="Execute">
+      <command>gedit</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Web Browser">
+    <action name="Execute">
+      <command>firefox</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <separator label="Applications" />
+  <menu id="xdg-menu" />
+  <separator label="Places" />
+  <menu id="xdg-places" />
+  <separator />
+  <item label="Log Out">
+    <action name="Exit">
+      <prompt>yes</prompt>
+    </action>
+  </item>
+</menu>
+</openbox_menu>

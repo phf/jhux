@@ -1,0 +1,37 @@
+pkgname=jhux-install-scripts
+pkgver=0.1
+pkgrel=1
+pkgdesc="Install scripts for JH/UX"
+arch=('i686' 'x86_64')
+url="https://github.com/phf/jhux"
+license=('GPL')
+source=('01_prepare_disks'
+        '02_install_packages'
+        '03_configure_system'
+        'jhux-installer.py'
+	'jhux-install.xml'
+        'pacman-key-yes')
+md5sums=('d025e83de2a67469c30ad97f5d311fb3'
+         'e71bdcfea594b36df3a40a9788fb9237'
+         'e41f67c635211142ba6717b9214f9b95'
+         '6f011eb11239934292f5a839902dd113'
+         'be70845dcf0d5bff644db47a34c58633'
+         'c490de7aa07fbcf29bf83bcd7cde37f6')
+build() {
+  cd "$srcdir"
+}
+
+package() {
+  depends=('python2' 'arch-install-scripts')
+
+  cd "${srcdir}"
+  install -d "${pkgdir}/usr/lib/jhux-installer"
+  install -Dm 755 01_prepare_disks "${pkgdir}/usr/lib/jhux-installer/"
+  install -Dm 755 02_install_packages "${pkgdir}/usr/lib/jhux-installer/"
+  install -Dm 755 03_configure_system "${pkgdir}/usr/lib/jhux-installer/"
+  install -d "${pkgdir}/usr/share/jhux-installer"
+  install -Dm 644 jhux-install.xml "${pkgdir}/usr/share/jhux-installer/"
+  install -d "${pkgdir}/usr/bin"
+  install -Dm 755 jhux-installer.py "${pkgdir}/usr/bin/jhux-installer"
+  install -Dm 755 pacman-key-yes "${pkgdir}/usr/bin/"
+}

@@ -1,0 +1,6 @@
+#!/usr/bin/expect
+spawn pacman-key --populate archlinux
+for {} 1 {} {
+expect eof break \
+{Really sign? (y/N)} { send "y\r" }
+}

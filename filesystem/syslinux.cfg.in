@@ -1,0 +1,12 @@
+DEFAULT menu.c32
+PROMPT 0
+MENU TITLE Arch Linux
+TIMEOUT 300
+
+LABEL arch
+MENU LABEL Arch Linux
+LINUX /arch/boot/x86_64/vmlinuz
+INITRD /arch/boot/x86_64/archiso.img
+APPEND archisolabel=ISO_LABEL
+
+ONTIMEOUT arch

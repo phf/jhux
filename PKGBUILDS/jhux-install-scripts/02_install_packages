@@ -1,0 +1,6 @@
+haveged -w 1024 &
+pacman-key --init
+pacman-key-yes
+pkill haveged
+pacstrap /mnt base base-devel `cat /usr/share/jhux-installer/packagelist.txt` grub-bios os-prober
+genfstab -p -U /mnt > /mnt/etc/fstab

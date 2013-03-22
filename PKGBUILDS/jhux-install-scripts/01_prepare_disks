@@ -1,0 +1,4 @@
+DEVICE=$1
+
+mkfs.ext4 $DEVICE
+mount $DEVICE /mnt
